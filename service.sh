@@ -102,6 +102,11 @@ settings put global min_refresh_rate "${TARGET_FPS}.0"
 settings put global peak_refresh_rate "${TARGET_FPS}.0"
 settings put global refresh_rate_mode 2
 
+# Precision Animation Scaling (Fluid 0.8x Curve)
+settings put global window_animation_scale 0.8
+settings put global transition_animation_scale 0.8
+settings put global animator_duration_scale 0.8
+
 if [ -f /sys/devices/platform/soc/11db1000.i2c/i2c-6/6-0038/fts_glove_mode ]; then
     echo 1 > /sys/devices/platform/soc/11db1000.i2c/i2c-6/6-0038/fts_glove_mode 2>/dev/null
 fi

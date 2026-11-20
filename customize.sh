@@ -65,6 +65,7 @@ sleep 0.3
 
 ui_print "  ─── [4/6] Display & Touch Synchronization ─────────"
 ui_print "  ├── Synchronizing continuous ${DETECTED_FPS}Hz refresh rate..."
+ui_print "  ├── Tuning fluid animation scale to 0.8x..."
 ui_print "  └── Polling 240Hz high-frequency touch sampling..."
 ui_print "  [✓] Display timing synchronized."
 ui_print " "
