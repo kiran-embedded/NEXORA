@@ -3,3 +3,8 @@ vendor.debug.sf.cpupolicy.log=0
 sys.lmk.reportkills=0
 persist.sys.lmk.reportkills=false
 persist.traced.enable=0
+
+# ART Garbage Collection & Heap Optimization
+dalvik.vm.heapminfree=8m
+dalvik.vm.heapmaxfree=16m
+dalvik.vm.heaptargetutilization=0.80
