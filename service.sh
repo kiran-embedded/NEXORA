@@ -33,16 +33,21 @@ if [ -f /dev/cpuctl/top-app/cpu.uclamp.min ]; then
 fi
 echo 1 > /proc/sys/kernel/sched_child_runs_first 2>/dev/null
 
-# 3. Virtual Memory & LZ4 ZRAM
+# 3. Virtual Memory & LZ4 ZRAM Subsystem Calibration
 echo 0 > /proc/sys/vm/page-cluster 2>/dev/null
 echo 32768 > /proc/sys/vm/min_free_kbytes 2>/dev/null
 echo 100 > /proc/sys/vm/swappiness
-echo 70 > /proc/sys/vm/vfs_cache_pressure
-echo 20 > /proc/sys/vm/dirty_ratio
-echo 10 > /proc/sys/vm/dirty_background_ratio
+echo 100 > /proc/sys/vm/vfs_cache_pressure
+echo 120 > /proc/sys/vm/watermark_scale_factor 2>/dev/null
+echo 15 > /proc/sys/vm/dirty_ratio
+echo 5 > /proc/sys/vm/dirty_background_ratio
 echo 1500 > /proc/sys/vm/dirty_writeback_centisecs 2>/dev/null
 echo 1000 > /proc/sys/vm/dirty_expire_centisecs 2>/dev/null
-echo 0 > /sys/kernel/mm/lru_gen/min_ttl_ms 2>/dev/null
+echo 1000 > /sys/kernel/mm/lru_gen/min_ttl_ms 2>/dev/null
+
+# Multitasking & Background Retention Calibration
+device_config put activity_manager max_cached_processes 36 2>/dev/null
+device_config put activity_manager max_phantom_processes 2147483647 2>/dev/null
 
 # Enforce RAM Plus Disabled
 settings put global ram_expand_size 0 2>/dev/null
