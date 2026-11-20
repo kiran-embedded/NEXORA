@@ -107,6 +107,30 @@ settings put global window_animation_scale 0.8
 settings put global transition_animation_scale 0.8
 settings put global animator_duration_scale 0.8
 
+# 7. Real-Time UI Scheduler & Thread Boost
+if [ -f /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive ]; then
+    echo 1 > /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 2>/dev/null
+fi
+
+# Silence heavy logcat spam tags that wake logd during UI gestures
+setprop log.tag.WindowManager INFO 2>/dev/null
+setprop log.tag.RefactorFlag ERROR 2>/dev/null
+setprop log.tag.PanelSplitOpenAnimator INFO 2>/dev/null
+
+# Priority renice for core UI rendering threads (SystemUI & SurfaceFlinger)
+(
+    sleep 8
+    SF_PID=$(pidof surfaceflinger)
+    [ -n "$SF_PID" ] && renice -n -10 -p $SF_PID 2>/dev/null
+    
+    SYS_PID=$(pidof com.android.systemui)
+    if [ -n "$SYS_PID" ]; then
+        renice -n -10 -p $SYS_PID 2>/dev/null
+        RT_TID=$(ps -T -p $SYS_PID | grep RenderThread | head -n 1 | awk '{print $3}')
+        [ -n "$RT_TID" ] && renice -n -20 -p $RT_TID 2>/dev/null
+    fi
+) &
+
 if [ -f /sys/devices/platform/soc/11db1000.i2c/i2c-6/6-0038/fts_glove_mode ]; then
     echo 1 > /sys/devices/platform/soc/11db1000.i2c/i2c-6/6-0038/fts_glove_mode 2>/dev/null
 fi
