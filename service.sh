@@ -36,7 +36,7 @@ echo 1 > /proc/sys/kernel/sched_child_runs_first 2>/dev/null
 # 3. Virtual Memory & LZ4 ZRAM
 echo 0 > /proc/sys/vm/page-cluster 2>/dev/null
 echo 32768 > /proc/sys/vm/min_free_kbytes 2>/dev/null
-echo 60 > /proc/sys/vm/swappiness
+echo 100 > /proc/sys/vm/swappiness
 echo 70 > /proc/sys/vm/vfs_cache_pressure
 echo 20 > /proc/sys/vm/dirty_ratio
 echo 10 > /proc/sys/vm/dirty_background_ratio

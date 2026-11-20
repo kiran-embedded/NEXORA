@@ -42,7 +42,7 @@ sleep 0.6
 ui_print "  ─── [1/6] Virtual Memory & Hardware ZRAM ──────────"
 ui_print "  ├── Enabling LZ4 hardware compression..."
 ui_print "  ├── Calibrating page-cluster to 0 (single-page faulting)..."
-ui_print "  └── Locking Swappiness (60) & VFS pressure (70)..."
+ui_print "  └── Locking Swappiness (100) & VFS pressure (70)..."
 ui_print "  [✓] Memory subsystem calibrated."
 ui_print " "
 sleep 0.3
