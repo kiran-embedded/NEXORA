@@ -38,7 +38,7 @@ echo 0 > /proc/sys/vm/page-cluster 2>/dev/null
 echo 32768 > /proc/sys/vm/min_free_kbytes 2>/dev/null
 echo 100 > /proc/sys/vm/swappiness
 echo 100 > /proc/sys/vm/vfs_cache_pressure
-echo 120 > /proc/sys/vm/watermark_scale_factor 2>/dev/null
+echo 30 > /proc/sys/vm/watermark_scale_factor 2>/dev/null
 echo 15 > /proc/sys/vm/dirty_ratio
 echo 5 > /proc/sys/vm/dirty_background_ratio
 echo 1500 > /proc/sys/vm/dirty_writeback_centisecs 2>/dev/null
