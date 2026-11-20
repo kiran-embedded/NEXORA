@@ -1,4 +1,4 @@
-# NEXORA - Universal Kernel & Subsystem Optimization Engine
+# NEXORA - Hardware & Kernel Optimization
 
 Developed by **Kiran_embedded** ([GitHub](https://github.com/kiran-embedded))
 
@@ -6,7 +6,7 @@ NEXORA is a high-performance hardware and kernel optimization module designed sp
 
 ## Key Capabilities
 
-- **Dynamic Hardware Auto-Detection**: Dynamically resolves device model, SoC vendor (MediaTek Dimensity/Helio, Samsung Exynos, Qualcomm Snapdragon), and kernel version during installation.
+- **Dynamic Hardware Auto-Detection**: Dynamically resolves device model, SoC platform, and kernel version during installation.
 - **LZ4 Hardware ZRAM & Zero Page-Cluster**: Configures high-throughput LZ4 swap compression (~4,000 MB/s) with `page-cluster=0` (strictly 1 page / 4 KB fault decompression).
 - **RAM Plus Disablement Enforced**: Locks `ram_expand_size=0` to guarantee 100% direct physical RAM usage without flash degradation.
 - **UFS Multi-Queue Acceleration**: Bypasses redundant software merging (`nomerges=2`), silences I/O statistics spinlocks (`iostats=0`), and sets 512 KB readahead buffers.
@@ -17,7 +17,7 @@ NEXORA is a high-performance hardware and kernel optimization module designed sp
 
 ## Installation
 
-1. Download `NEXORA-v1.0.0-Universal-Samsung.zip` from the Releases tab.
+1. Download `NEXORA-v1.0.0-Samsung.zip` from the Releases tab.
 2. Open **KernelSU**, **Magisk**, or **APatch**.
 3. Select **Install from storage** and flash the ZIP.
 4. Reboot the device.

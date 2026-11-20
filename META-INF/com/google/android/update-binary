@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# Universal Module Installer for KernelSU, KernelSU-Next, APatch, and Magisk
+# Module Installer for KernelSU, KernelSU-Next, APatch, and Magisk
 umask 022
 
 OUTFD=$2
@@ -31,7 +31,7 @@ elif [ -f /data/adb/ap/util_functions.sh ]; then
   exit 0
 fi
 
-# 2. Universal Standalone Installation Fallback
+# 2. Standalone Installation Fallback
 TMPDIR=/dev/tmp/module_install
 rm -rf "$TMPDIR" 2>/dev/null
 mkdir -p "$TMPDIR"
