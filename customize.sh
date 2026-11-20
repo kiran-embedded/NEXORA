@@ -84,8 +84,14 @@ ui_print "  └── Terminating background Perfetto tracers..."
 ui_print "  [✓] Overhead eliminated."
 ui_print " "
 
-set_perm_recursive $MODPATH 0 0 0755 0644
-set_perm $MODPATH/service.sh 0 0 0755
+if command -v set_perm_recursive >/dev/null 2>&1; then
+    set_perm_recursive "$MODPATH" 0 0 0755 0644
+    set_perm "$MODPATH/service.sh" 0 0 0755
+else
+    chmod -R 755 "$MODPATH" 2>/dev/null
+    chmod 644 "$MODPATH/module.prop" "$MODPATH/system.prop" 2>/dev/null
+    chmod 755 "$MODPATH/service.sh" 2>/dev/null
+fi
 
 ui_print "  ==================================================="
 ui_print "   [✓] NEXORA installed successfully!                "
