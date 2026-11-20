@@ -1,6 +1,9 @@
 #!/system/bin/sh
-# NEXORA Core Engine - Universal Samsung Optimizer
-# Author: Kiran_embedded (https://github.com/kiran-embedded)
+# ==============================================================================
+# NEXORA - Samsung Hardware & Kernel Optimizer
+# Architect: Kiran_embedded (https://github.com/kiran-embedded)
+# Platform : Samsung Galaxy (MediaTek / Exynos / Snapdragon)
+# ==============================================================================
 
 while [ "$(getprop sys.boot_completed)" != "1" ]; do
     sleep 1
@@ -45,7 +48,7 @@ echo 0 > /sys/kernel/mm/lru_gen/min_ttl_ms 2>/dev/null
 settings put global ram_expand_size 0 2>/dev/null
 setprop persist.sys.zram.ram_expand_size 0 2>/dev/null
 
-# ZRAM Compression Configuration
+# LZ4 ZRAM Hardware Compression
 if ! grep -q "\[lz4\]" /sys/block/zram0/comp_algorithm 2>/dev/null; then
     sync
     echo 3 > /proc/sys/vm/drop_caches 2>/dev/null
@@ -84,7 +87,6 @@ echo 0 > /proc/sys/net/ipv4/tcp_autocorking 2>/dev/null
 settings put global accessibility_reduce_transparency 0
 settings put secure accessibility_reduce_transparency 0
 
-# Dynamic Refresh Rate Resolution
 TARGET_FPS=60
 PEAK_DETECT=$(settings get system peak_refresh_rate 2>/dev/null)
 if [ -n "$PEAK_DETECT" ] && [ "$PEAK_DETECT" != "null" ]; then
@@ -100,7 +102,6 @@ settings put global min_refresh_rate "${TARGET_FPS}.0"
 settings put global peak_refresh_rate "${TARGET_FPS}.0"
 settings put global refresh_rate_mode 2
 
-# Touch Sampling
 if [ -f /sys/devices/platform/soc/11db1000.i2c/i2c-6/6-0038/fts_glove_mode ]; then
     echo 1 > /sys/devices/platform/soc/11db1000.i2c/i2c-6/6-0038/fts_glove_mode 2>/dev/null
 fi

@@ -1,6 +1,6 @@
-id=nexora_engine
+id=nexora
 name=NEXORA
 version=1.0.0
 versionCode=100
 author=Kiran_embedded
-description=Universal hardware and kernel optimization engine for Samsung Galaxy devices. Dynamically calibrates ZRAM, storage queues, touch sampling, and display refresh rates.
+description=Hardware-level kernel and subsystem optimizer for Samsung Galaxy devices. Developed by Kiran_embedded (https://github.com/kiran-embedded). Features LZ4 ZRAM with single-page decompression, UFS hardware I/O acceleration, touch governor calibration, and display refresh synchronization.
