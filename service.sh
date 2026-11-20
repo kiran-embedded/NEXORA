@@ -33,7 +33,7 @@ if [ -f /dev/cpuctl/top-app/cpu.uclamp.min ]; then
 fi
 echo 1 > /proc/sys/kernel/sched_child_runs_first 2>/dev/null
 
-# 3. Virtual Memory & LZ4 ZRAM Subsystem Calibration
+# 3. Virtual Memory & LZ4 ZRAM Subsystem Calibration (AETHER-Engineered)
 echo 0 > /proc/sys/vm/page-cluster 2>/dev/null
 echo 32768 > /proc/sys/vm/min_free_kbytes 2>/dev/null
 echo 100 > /proc/sys/vm/swappiness
@@ -44,6 +44,18 @@ echo 5 > /proc/sys/vm/dirty_background_ratio
 echo 1500 > /proc/sys/vm/dirty_writeback_centisecs 2>/dev/null
 echo 1000 > /proc/sys/vm/dirty_expire_centisecs 2>/dev/null
 echo 1000 > /sys/kernel/mm/lru_gen/min_ttl_ms 2>/dev/null
+echo 524288 > /proc/sys/vm/max_map_count 2>/dev/null
+echo 20 > /proc/sys/vm/compaction_proactiveness 2>/dev/null
+
+# ZRAM Queue Hardware Acceleration (from AETHER Kernel mojito)
+for zq in /sys/block/zram*/queue; do
+    [ -d "$zq" ] || continue
+    echo 0 > "$zq/read_ahead_kb" 2>/dev/null
+    echo 2 > "$zq/rq_affinity" 2>/dev/null
+    echo 2 > "$zq/nomerges" 2>/dev/null
+    echo 0 > "$zq/add_random" 2>/dev/null
+    echo 0 > "$zq/iostats" 2>/dev/null
+done
 
 # Multitasking & Background Retention Calibration
 device_config put activity_manager max_cached_processes 36 2>/dev/null
