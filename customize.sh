@@ -78,19 +78,11 @@ ui_print "  [✓] Low-latency network stack active."
 ui_print " "
 sleep 0.3
 
-ui_print "  ─── [6/7] Kernel Log Overhead Elimination ─────────"
+ui_print "  ─── [6/6] Kernel Log Overhead Elimination ─────────"
 ui_print "  ├── Silencing printk console debug logging..."
 ui_print "  ├── Disabling scheduler statistics accounting..."
 ui_print "  └── Terminating background Perfetto tracers..."
 ui_print "  [✓] Overhead eliminated."
-ui_print " "
-sleep 0.3
-
-ui_print "  ─── [7/7] Real-Time UI Scheduler & Thread Boost ────"
-ui_print "  ├── Setting top-app uclamp.latency_sensitive=1..."
-ui_print "  ├── Prioritizing SurfaceFlinger (-10) & SystemUI RenderThread (-20)..."
-ui_print "  └── Silencing WindowManager & layout animator logcat spam..."
-ui_print "  [✓] UI thread scheduling locked."
 ui_print " "
 
 if command -v set_perm_recursive >/dev/null 2>&1; then
