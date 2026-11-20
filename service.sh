@@ -37,8 +37,9 @@ echo 1 > /proc/sys/kernel/sched_child_runs_first 2>/dev/null
 echo 0 > /proc/sys/vm/page-cluster 2>/dev/null
 echo 32768 > /proc/sys/vm/min_free_kbytes 2>/dev/null
 echo 100 > /proc/sys/vm/swappiness
-echo 100 > /proc/sys/vm/vfs_cache_pressure
+echo 70 > /proc/sys/vm/vfs_cache_pressure
 echo 30 > /proc/sys/vm/watermark_scale_factor 2>/dev/null
+setprop vendor.sys.vm.watermarkscalefactor 30 2>/dev/null
 echo 15 > /proc/sys/vm/dirty_ratio
 echo 5 > /proc/sys/vm/dirty_background_ratio
 echo 1500 > /proc/sys/vm/dirty_writeback_centisecs 2>/dev/null
