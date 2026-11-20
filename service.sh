@@ -24,7 +24,7 @@ stop traced_probes 2>/dev/null
 for policy in /sys/devices/system/cpu/cpufreq/policy*; do
     [ -d "$policy/sugov_ext" ] || continue
     echo 0 > "$policy/sugov_ext/up_rate_limit_us" 2>/dev/null
-    echo 1000 > "$policy/sugov_ext/down_rate_limit_us" 2>/dev/null
+    echo 5000 > "$policy/sugov_ext/down_rate_limit_us" 2>/dev/null
 done
 
 if [ -f /dev/cpuctl/top-app/cpu.uclamp.min ]; then
@@ -124,9 +124,20 @@ settings put global window_animation_scale 0.8
 settings put global transition_animation_scale 0.8
 settings put global animator_duration_scale 0.8
 
-if [ -f /sys/devices/platform/soc/11db1000.i2c/i2c-6/6-0038/fts_glove_mode ]; then
-    echo 1 > /sys/devices/platform/soc/11db1000.i2c/i2c-6/6-0038/fts_glove_mode 2>/dev/null
+# 7. Ultra-Low Touch Latency & High-Frequency Polling
+FOCAL=/sys/devices/platform/soc/11db1000.i2c/i2c-6/6-0038
+if [ -d "$FOCAL" ]; then
+    echo 1 > "$FOCAL/fts_prc" 2>/dev/null
+    echo 1 > "$FOCAL/fts_glove_mode" 2>/dev/null
 fi
+unset FOCAL
+
 if [ -w /sys/class/sec/tsp/cmd ]; then
+    echo aot_enable,1 > /sys/class/sec/tsp/cmd 2>/dev/null
     echo glove_mode,1 > /sys/class/sec/tsp/cmd 2>/dev/null
 fi
+
+settings put system touch_sensitivity 1 2>/dev/null
+settings put system pointer_speed 3 2>/dev/null
+settings put secure long_press_timeout 250 2>/dev/null
+settings put secure multi_press_timeout 250 2>/dev/null
